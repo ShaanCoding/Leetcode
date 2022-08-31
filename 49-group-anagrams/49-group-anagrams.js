@@ -11,10 +11,8 @@ var groupAnagrams = function(strs) {
     for(let i = 0; i < strs.length; i++) {
         let sortedString = strs[i].split("").sort();
         if(returnOutput[sortedString] == undefined) {
-            console.log("Test 1");
             returnOutput[sortedString] = [strs[i]];
         } else {
-            console.log("Test 2")
             returnOutput[sortedString].push(strs[i]);
         }
     }
