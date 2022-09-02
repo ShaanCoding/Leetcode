@@ -3,34 +3,25 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-  
-    // Left + Right
+    // Stack
+    let stack = [];
     
-    // If next to each other we can say they're correct
-    // Or if they're like inside of each other but correct depth
-        
-    // Looking at deepest value
-    
-    // ()[] or ({)} or ({}) or ({})() => ( ), { }, [ ]
-        // {} deleted, (), ()
-        
-    let length = s.length;
-    
-    for(let i = 0; i < length; i++) {
-        s = s.replace("{}", "");
-        s = s.replace("[]", "");
-        s = s.replace("()", "");
+    for(let i = 0; i < s.length; i++) {
+        if(s[i] == "[" || s[i] == "{" || s[i] == "(") {
+            stack.push(s[i]);
+        } else {
+            let element = stack[stack.length - 1];
+            if(element == "[" && s[i] == "]") {
+                stack.pop();                
+            } else if (element == "{" && s[i] == "}") {
+                stack.pop();
+            } else if (element == "(" && s[i] == ")") {
+                stack.pop();                
+            } else {
+                return false;
+            }
+        }
     }
     
-    return s.length == 0;
-    
-    // "[]" == 2
-    // "[({(())}[()])]"
-        
-    // So we enter the deepest depth of the string
-        // If valid i.e left bracket matches right, delete
-        // Repeat for the entire thing, if empty then valid string else false
-    
-    return true;
-    
+    return stack.length == 0;
 };
