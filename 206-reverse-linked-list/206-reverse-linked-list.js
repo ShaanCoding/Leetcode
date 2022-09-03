@@ -10,42 +10,9 @@
  * @return {ListNode}
  */
 var reverseList = function(head) {    
-    // Listen, Example, Draw, Algorithm Pseudocode, Implement, Edgecase
-    
-    // Pseudocode
-    /*
-    // BASE CASE (Before recursion): Initialize previousElement, currentElement
-    // store currentElement.next
-    // For previousElement.next = null
-    
-    // Recursion
-        1st iteration: currentElement.next store this variable
-            currentElement.next = previous
-            
-            Make previous 2, make current 3
-    
-    // Terminal Case
-        AFTER NULL CONDITION
-        Check if temporary, instead of assining we terminate
-    
-    */
-    
-    if(!head) return null;
-    
-    let previousElement = head;
-    let currentElement = head.next;
-    // previous element
-    previousElement.next = null;
-    
-    while(currentElement?.val !== undefined) {
-          // 1st iterator: 
-          let temporaryVariable = currentElement.next;
-          currentElement.next = previousElement;
-          // iterate forward
-          previousElement = currentElement;
-          currentElement = temporaryVariable;
+  let [prev, current] = [null, head]
+    while(current) {
+        [current.next, prev, current] = [prev, current, current.next]
     }
-    
-    // Return array     
-    return previousElement; 
+    return prev
 };
