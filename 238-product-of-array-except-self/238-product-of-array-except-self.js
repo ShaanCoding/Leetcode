@@ -32,7 +32,6 @@ var productExceptSelf = function(nums) {
         if(nums[i] != 0) {
             sum = sum * nums[i];            
         } else {
-            console.log("Zero");
             if(doesContainZero) moreThanOneZero = true;
             doesContainZero = true;
         }
