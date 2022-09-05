@@ -7,20 +7,6 @@ var productExceptSelf = function(nums) {
     
     // I.e [1,2,3,4] =? [24, 12, 8,6]
     
-    /* 
-        Time limit exceeded for brute force
-        let newArray = [];
-
-        for(let i = 0; i < nums.length; i++) {
-            newArray[i] = 1;
-            for(let j = 0; j < nums.length; j++) {
-                if(i !== j) newArray[i] = newArray[i] * nums[j];
-            }
-        }
-
-        return newArray;
-    */
-    
     // Multiple all items in one iteration O(n) and then divide by index O(n); giving total complexity O(2n)
     
     let returnArray = [];
