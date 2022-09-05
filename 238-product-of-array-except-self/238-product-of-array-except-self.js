@@ -35,14 +35,12 @@ var productExceptSelf = function(nums) {
             if(doesContainZero) moreThanOneZero = true;
             doesContainZero = true;
         }
-        
-        if(moreThanOneZero) sum = 0;
     }
     
+    if(moreThanOneZero) return Array(nums.length).fill(0);
+    
     for(let i = 0; i < nums.length; i++) {
-        if(moreThanOneZero) {
-            returnArray[i] = 0;
-        } else if(doesContainZero) {
+        if(doesContainZero) {
             returnArray[i] = nums[i] == 0 ? sum : 0;                
         } else {
             returnArray[i] = sum / nums[i];
