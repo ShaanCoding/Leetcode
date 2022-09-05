@@ -6,7 +6,7 @@
  */
 var encode = function(strs) {
     // encode a list of strings
-    return strs.join("\n");
+    return strs.join(String.fromCharCode(257));
 };
 
 /**
@@ -17,7 +17,7 @@ var encode = function(strs) {
  */
 var decode = function(s) {
     // decode
-    return s.split("\n");
+    return s.split(String.fromCharCode(257));
 };
 
 /**
