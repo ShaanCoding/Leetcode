@@ -14,8 +14,8 @@ function mergeTwoLists(
   list1: ListNode | null,
   list2: ListNode | null
 ): ListNode | null {
-  let dummy: ListNode | null = new ListNode(-1, null);
-  let returnArray: ListNode | null = dummy;
+  let sentinelNode: ListNode | null = new ListNode(-1, null);
+  let returnArray: ListNode | null = sentinelNode;
 
   // Head is now defined, let's continue until all null
   while (list1 !== null && list2 !== null) {
@@ -35,5 +35,5 @@ function mergeTwoLists(
     returnArray.next = new ListNode(list2.val, list2?.next);
   }
 
-  return dummy.next;
+  return sentinelNode.next;
 }
