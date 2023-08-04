@@ -16,14 +16,15 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
     
     let sentinelNode: ListNode | null = new ListNode(0, head);
     let traversalNode: ListNode | null = sentinelNode;
-    let lengthOfArray: number = 0;
     
+    // Counts number of nodes     
+    let lengthOfArray: number = 0;
     while(traversalNode != null) {
-        lengthOfArray++;
         traversalNode = traversalNode?.next;
+        if(traversalNode !== null) lengthOfArray++;
     }
         
-    let indexToGoTo = lengthOfArray - n - 1;
+    let indexToGoTo = lengthOfArray - n;
     traversalNode = sentinelNode;
         
     while(indexToGoTo > 0) {
@@ -31,6 +32,7 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
         traversalNode = traversalNode.next;        
     }
         
+    // Goes to before the nth node, and we replace the next with the node after
     traversalNode.next = traversalNode.next.next;
     return sentinelNode.next;
 };
