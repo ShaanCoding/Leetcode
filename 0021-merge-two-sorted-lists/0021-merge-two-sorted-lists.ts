@@ -17,6 +17,9 @@ function mergeTwoLists(
   let sentinelNode: ListNode | null = new ListNode(-1, null);
   let returnArray: ListNode | null = sentinelNode;
 
+  if(list2 == null) return list1;
+  if(list1 == null) return list2;
+      
   // Head is now defined, let's continue until all null
   while (list1 !== null && list2 !== null) {
     if (list1.val > list2.val) {
