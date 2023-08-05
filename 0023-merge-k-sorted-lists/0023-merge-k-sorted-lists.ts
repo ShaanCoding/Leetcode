@@ -11,46 +11,42 @@
  */
 
 function mergeKLists(lists: Array<ListNode | null>): ListNode | null {
-    // Given an array list of LL we want to make one linked list from smallest to largest
+    if(lists.length == 0) return null;
     
-    let isAllNull: boolean = false;
-    
+    while (lists.length > 1) {
+        let mergedLists: Array<ListNode | null> = [];
+        
+        for(let i = 0; i < lists.length; i += 2) {
+            let l1: ListNode | null = lists[i];
+            let l2: ListNode | null = ((i + 1) < lists.length) ? lists[i + 1] : null;
+            mergedLists.push(mergeList(l1, l2));
+        }
+        lists = mergedLists;
+    }
+    return lists[0];
+
+};
+
+function mergeList(l1: ListNode | null, l2: ListNode | null): ListNode | null {
     let sentinelNode: ListNode | null = new ListNode(0, null);
-    let traversalNode = sentinelNode;
+    let traversalNode: ListNode | null = sentinelNode;
     
-    while(isAllNull === false) {
-        // get smallest value and for that one let's iterate it
-        let smallestValue: number = Infinity;
-        for(let i = 0; i < lists.length; i++) {
-            if(smallestValue > lists[i]?.val) smallestValue = lists[i].val;
-        }
-        
-        // for(let list of lists) {
-        //     if(smallestValue > list?.val) smallestValue = list.val;
-        // }
-            
-        // Iterate smallestval one forward one
-        for(let i = 0; i < lists.length; i++) {
-            if(lists[i]?.val == smallestValue) {
-              lists[i] = lists[i]?.next;
-              break; 
-           }
-        }
-            
-        // for(let list of lists) {
-        //     if(smallestValue == list?.val) {
-        //        list = list?.next;
-        //        break;
-        //    }
-        // }
-        
-        if(smallestValue != Infinity) {
-            traversalNode.next = new ListNode(smallestValue, null);
-            traversalNode = traversalNode.next;
+    while(l1 != null && l2 != null) {
+        if(l1.val > l2.val) {
+            traversalNode.next = l2;
+            l2 = l2?.next;
         } else {
-            isAllNull = true;
+            traversalNode.next = l1;
+            l1 = l1?.next;
         }
+        traversalNode = traversalNode?.next;
     }
         
+    if(l1 != null) {
+        traversalNode.next = l1;
+    } else if(l2 != null) {
+        traversalNode.next = l2;
+    }
+            
     return sentinelNode.next;
-};
+}
