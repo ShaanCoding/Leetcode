@@ -11,32 +11,26 @@
  */
 
 function deleteDuplicates(head: ListNode | null): ListNode | null {
-//     Return a linked list in a sorted list, removing duplicate numbers1
+//     Sliding window, method we have our sentinelNode to navigate through, and a navigation one (current and previous), if current == current.next, move forward until false and then make previous.next = new node and repeat
     
-    // Traverse to all, add to Set, sort set and then convert to linked list
-    // O(n) + O(klogk) + O(k)
+    let sentinelNode: ListNode | null = new ListNode(0, head);
     
-//     One pass without sorting
+    let prevNode: ListNode | null = sentinelNode;
+    let currNode: ListNode | null = sentinelNode.next;
     
-    let frequencyHashMap: Map<number, number> = new Map<number, number>();
-    
-    while(head !== null) {
-        frequencyHashMap.set(head.val, (frequencyHashMap.get(head.val) || 0) + 1);
-        head = head?.next;
-    }
-    
-    let goodArray = [];
-    for(let [key, value] of frequencyHashMap) {
-        if(value == 1) goodArray.push(key);
-    }
-    
-//     Form the new linkedList
-    let sentinelNode: ListNode | null = new ListNode(0, null);
-    let traversalNode = sentinelNode;
+    while(currNode !== null) {
         
-    for(let i = 0; i < goodArray.length; i++) {
-        traversalNode.next = new ListNode(goodArray[i], null);
-        traversalNode = traversalNode.next;
+//         If next val is equal to the same
+        if(currNode?.next !== null && currNode.next.val === currNode.val) {
+           while(currNode?.next !== null && currNode.val == currNode?.next.val) {
+                currNode = currNode.next;
+            }
+            prevNode.next = currNode.next;
+        } else {
+            prevNode = prevNode.next;
+        }
+        
+        currNode = currNode?.next;
     }
         
     return sentinelNode.next;
