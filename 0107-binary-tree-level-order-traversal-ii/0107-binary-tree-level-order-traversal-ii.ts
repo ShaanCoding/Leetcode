@@ -32,8 +32,8 @@ function levelOrderBottom(root: TreeNode | null): number[][] {
             if(node?.left) queue.push(node.left);
             if(node?.right) queue.push(node.right);
         }
-        returnArray.push(level);
+        returnArray.unshift(level);
     }
     
-    return returnArray.reverse();
+    return returnArray;
 };
