@@ -8,8 +8,7 @@ function uniqueOccurrences(arr: number[]): boolean {
         aMap.set(item, (aMap.get(item) || 0) + 1);
     }
     
-    let frequency: number[] = Array.from(aMap.values());
-    let frequencySet: Set<number> = new Set<number>(frequency);
+    let frequencySet: Set<number> = new Set<number>(aMap.values());
     
-    return frequencySet.size == frequency.length;
+    return frequencySet.size == aMap.size;
 };
