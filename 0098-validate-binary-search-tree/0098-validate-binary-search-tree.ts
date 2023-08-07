@@ -13,16 +13,29 @@
  */
 
 function isValidBST(root: TreeNode | null): boolean {
-    const inorder = (root: TreeNode): boolean => {
-        if(!root) return true;
-        
-        if(!inorder(root?.left)) return false;
-        if(prev != null && root.val <= prev) return false;
-        prev = root.val;
-        
-        return inorder(root?.right);
+  if (!root || (root?.left == null && root?.right == null)) return true;
+
+  return dfs(root);
+}
+
+const dfs = (
+  node: TreeNode,
+  lowerBound: number = -Infinity,
+  upperBound: number = Infinity
+): boolean => {
+  if (node.val <= lowerBound || node.val >= upperBound) return false;
+
+  if (node.left) {
+    if (!dfs(node.left, lowerBound, node.val)) {
+      return false;
     }
-    
-    let prev: number = null;
-    return inorder(root);
+  }
+
+  if (node.right) {
+    if (!dfs(node.right, node.val, upperBound)) {
+      return false;
+    }
+  }
+
+  return true;
 };
