@@ -15,13 +15,13 @@
 function isValidBST(root: TreeNode | null): boolean {
   if (!root || (root?.left == null && root?.right == null)) return true;
 
-  return dfs(root);
+  return dfs(root, -Infinity, Infinity);
 }
 
 const dfs = (
   node: TreeNode,
-  lowerBound: number = -Infinity,
-  upperBound: number = Infinity
+  lowerBound: number,
+  upperBound: number
 ): boolean => {
   if (node.val <= lowerBound || node.val >= upperBound) return false;
 
