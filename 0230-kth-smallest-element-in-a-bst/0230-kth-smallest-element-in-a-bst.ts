@@ -31,7 +31,6 @@ function kthSmallest(root: TreeNode | null, k: number): number {
 const dfs = (root: TreeNode | null, traversalStack: number[]): void => {
     if(!root) return;
         
-    
     if(root?.left) dfs(root.left, traversalStack);
     traversalStack.push(root.val);
     if(root?.right) dfs(root.right, traversalStack);
