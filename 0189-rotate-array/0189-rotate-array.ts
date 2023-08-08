@@ -8,7 +8,7 @@ function rotate(nums: number[], k: number): void {
 
     for(let i = 0; i < nums.length; i++) {
         let index = i + k;
-        while(index >= nums.length) index -= nums.length; 
+        index = index % nums.length; 
         rotatedArray[index] = nums[i];
     }
 
