@@ -16,35 +16,35 @@
 */
 
 function minEatingSpeed(piles: number[], h: number): number {
-    // Find maximum bananas
-    let left: number = 1, right: number = 1;
-    
-    for(let pile of piles) {
-        right = Math.max(right, pile);
+  // Find maximum bananas
+  let left: number = 1,
+    right: number = 1;
+
+  for (let pile of piles) {
+    right = Math.max(right, pile);
+  }
+
+  while (left < right) {
+    let middle = Math.floor((left + right) / 2);
+    let hours = 0;
+
+    for (const pile of piles) {
+      hours += Math.ceil(pile / middle);
     }
-    
-    while(left < right) {
-        let middle = Math.floor((left + right) / 2);
-        let hours = 0;
-        
-        for(const pile of piles) {
-            hours += Math.ceil(pile / middle);
-        }
-        
-        if(h >= hours) {
-            right = middle
-        } else {
-            left = middle + 1;
-        }
+
+    if (h >= hours) {
+      right = middle;
+    } else {
+      left = middle + 1;
     }
-    
-    return left;
-    
-    
-    // Left and right from lowest banans
-    
-    // Keep checking if valid for use case
-    
-    //  if hoursSpent <= h then split
-    // else set left to increase
-};
+  }
+
+  return left;
+
+  // Left and right from lowest banans
+
+  // Keep checking if valid for use case
+
+  //  if hoursSpent <= h then split
+  // else set left to increase
+}
