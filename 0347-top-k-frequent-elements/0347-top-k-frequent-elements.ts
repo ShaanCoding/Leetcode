@@ -16,15 +16,16 @@ function topKFrequent(nums: number[], k: number): number[] {
     
     occuranceList = occuranceList.sort((a, b) => b - a).slice(0, k);
     
-    let returnArray: Set<number> = new Set();
+    let returnArray: number[] = [];
     for(let occurance of occuranceList) {
         for(let [key, value] of freqMap) {
             if(value == occurance) {
-                returnArray.add(key);
+                returnArray.push(key);
+                freqMap.set(key, -1);
             }
         }    
     }
     
     
-    return Array.from(returnArray);
+    return returnArray;
 };
