@@ -1,34 +1,30 @@
 function topKFrequent(nums: number[], k: number): number[] {
-  // Top k most frequent elements, find the k most occuring elements
-
-  // Hashmap to get frequency of each item
-
-  // Then we need to get kth largest items, how to sort?, make an array of values, sort O(logn * n) + find values O(n);
-
-  let frequencyHashMap: Map<number, number> = new Map();
-
-  for (let item of nums) {
-    frequencyHashMap.set(item, (frequencyHashMap.get(item) || 0) + 1);
-  }
-
-  // Let get greatest values largest -> smallest
-  let arrayOfFrequencies: number[] = Array.from(frequencyHashMap.values()).sort(
-    (a, b) => b - a
-  );
-
-  // Get kth greatest items
-  let returnArray: number[] = [];
-
-  for (let i = 0; i < k; i++) {
-    // Find hashMa pwith value of arrayOfFrequencies[i] and add to returnArray
-    for (let [key, value] of frequencyHashMap) {
-      if (value == arrayOfFrequencies[i]) {
-        returnArray.push(key);
-        frequencyHashMap.set(key, -1);
-        break;
-      }
+//     Top k frequent elements
+    // Do value, frequency
+    let freqMap: Map<number, number> = new Map();
+    
+    for(const num of nums) {
+        freqMap.set(num, (freqMap.get(num) || 0) + 1);
     }
-  }
-
-  return returnArray;
-}
+    
+    // Sort the array based on highest counts so get the values into an array and then sort
+    let occuranceList: number[] = [];
+    
+    for(let [key, value] of freqMap) {
+        occuranceList.push(value);
+    }
+    
+    occuranceList = occuranceList.sort((a, b) => b - a).slice(0, k);
+    
+    let returnArray: Set<number> = new Set();
+    for(let occurance of occuranceList) {
+        for(let [key, value] of freqMap) {
+            if(value == occurance) {
+                returnArray.add(key);
+            }
+        }    
+    }
+    
+    
+    return Array.from(returnArray);
+};
